@@ -3,17 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_mal/bloc/anime_search/anime_search_bloc.dart';
 import 'package:flutter_mal/bloc/anime_search/anime_search_event.dart';
 import 'package:flutter_mal/bloc/anime_search/anime_search_state.dart';
-import 'package:flutter_mal/screens/discover/discover_widgets/anime_search_result.dart';
+import 'package:flutter_mal/constants/route.dart';
+import 'package:flutter_mal/screens/search_result/search_result_widget/anime_search_result.dart';
 import 'package:flutter_mal/widgets/bottom_navigtion_bar_global.dart';
 
-class DiscoverScreen extends StatefulWidget {
-  const DiscoverScreen({super.key});
+class SearchResultScreen extends StatefulWidget {
+  const SearchResultScreen({super.key});
 
   @override
-  State<DiscoverScreen> createState() => _DiscoverScreenState();
+  State<SearchResultScreen> createState() => _SearchResultScreenState();
 }
 
-class _DiscoverScreenState extends State<DiscoverScreen> {
+class _SearchResultScreenState extends State<SearchResultScreen> {
   final searchController = TextEditingController();
 
   @override
@@ -29,9 +30,13 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CircleAvatar(),
+            CircleAvatar(
+              backgroundColor: Colors.transparent,
+            ),
             Text("MAL Viewer"),
-            CircleAvatar(),
+            CircleAvatar(
+              backgroundColor: Colors.transparent,
+            ),
           ],
         ),
       ),
@@ -42,8 +47,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
               child: TextField(
-                controller: searchController,
-                onSubmitted: (value) => searchAnime(),
+                onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                  DefinedRoute().search,
+                  (route) => false,
+                ),
                 decoration: InputDecoration(
                   filled: true,
                   hintText: "Search",
@@ -55,7 +62,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.search),
                     onPressed: () {
-                      searchAnime();
+                      Navigator.of(context).pushNamed(
+                        DefinedRoute().searchResult,
+                      );
                     },
                   ),
                 ),

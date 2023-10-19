@@ -21,9 +21,9 @@ class _AnimeDetailState extends State<AnimeDetail> {
       initialVideoId: widget.anime.trailer?.youtubeId ?? "",
       flags: const YoutubePlayerFlags(
         autoPlay: true,
-        mute: true,
+        mute: false,
         disableDragSeek: false,
-        loop: false,
+        loop: true,
         isLive: false,
         forceHD: false,
       ),
@@ -47,7 +47,6 @@ class _AnimeDetailState extends State<AnimeDetail> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Text('${widget.anime.titleSynonyms ?? "-"}'),
                     const SizedBox(
                       height: 8,
                     ),
@@ -59,13 +58,16 @@ class _AnimeDetailState extends State<AnimeDetail> {
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
-                      children: List.generate(
-                        widget.anime.genres?.length ?? 0,
-                        (index) => TextBadge(
-                          text: widget.anime.genres?[index].name ?? "",
-                          color: Colors.blueAccent,
+                      children: [
+                        TextBadge(text: "${widget.anime.score} ★", color: Colors.orange,),
+                        ...List.generate(
+                          widget.anime.genres?.length ?? 0,
+                          (index) => TextBadge(
+                            text: widget.anime.genres?[index].name ?? "",
+                            color: Colors.blueAccent,
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                     const SizedBox(
                       height: 16,
@@ -91,19 +93,6 @@ class _AnimeDetailState extends State<AnimeDetail> {
                     const SizedBox(
                       height: 16,
                     ),
-                    // Row(
-                    //   children: [
-                    //     TextBadge(
-                    //       text:
-                    //           ,
-                    //       color: Colors.blue,
-                    //     ),
-                    //     const SizedBox(
-                    //       width: 8,
-                    //     ),
-                    //     TextBadge(text: 'Score - ${widget.anime.score}')
-                    //   ],
-                    // ),
                     const Divider(),
                     const SizedBox(
                       height: 8,
@@ -121,25 +110,25 @@ class _AnimeDetailState extends State<AnimeDetail> {
                     ),
                     Text('${widget.anime.titleEnglish ?? "-"}'),
                     const SizedBox(height: 16),
-                    Small("Season"),
+                    const Small("Season"),
                     Text(
                         '${widget.anime.season ?? "?"} - ${widget.anime.year ?? "?"}'),
                     const SizedBox(height: 16),
-                    Small("Aired"),
+                    const Small("Aired"),
                     Text(
                       widget.anime.aired!.from == true
                           ? ""
                           : "${Formatter().date(widget.anime.aired!.from ?? DateTime.now())}",
                     ),
                     const SizedBox(height: 16),
-                    Small("Source"),
+                    const Small("Source"),
                     Text(widget.anime.source ?? "-"),
                     const SizedBox(height: 16),
-                    Small("Studio"),
+                    const Small("Studio"),
                     Text(widget.anime.studios!.map((e) => e.name).toString() ??
                         "-"),
                     const SizedBox(height: 16),
-                    Small("Rating"),
+                    const Small("Rating"),
                     Text(widget.anime.rating ?? "-"),
                     const SizedBox(height: 16),
                     const Divider(),

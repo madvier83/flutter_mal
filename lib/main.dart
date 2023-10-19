@@ -5,7 +5,7 @@ import 'package:flutter_mal/bloc/anime_this_season/anime_this_season_bloc.dart';
 import 'package:flutter_mal/bloc/anime_top/anime_top_bloc.dart';
 import 'package:flutter_mal/bloc/anime_upcoming/anime_upcoming_bloc.dart';
 import 'package:flutter_mal/bloc/routes/route_cubit.dart';
-import 'package:flutter_mal/screens/discover/discover_view.dart';
+import 'package:flutter_mal/screens/search_result/search_result_view.dart';
 import 'package:flutter_mal/screens/home/home_view.dart';
 import 'package:flutter_mal/screens/search/search_view.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       routes: {
         DefinedRoute().home: (context) => const HomeScreen(),
         DefinedRoute().search: (context) => const SearchScreen(),
-        DefinedRoute().discover: (context) => const DiscoverScreen(),
+        DefinedRoute().searchResult: (context) => const SearchResultScreen(),
       },
     );
   }

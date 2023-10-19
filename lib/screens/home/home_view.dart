@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     icon: const Icon(Icons.search),
                     onPressed: () {
                       Navigator.of(context).pushNamed(
-                        DefinedRoute().discover,
+                        DefinedRoute().searchResult,
                       );
                     },
                   ),

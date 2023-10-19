@@ -23,7 +23,7 @@ class BottomNavbarGlobal extends StatelessWidget {
             }
             if (value == 1) {
               Navigator.of(context).pushNamedAndRemoveUntil(
-                DefinedRoute().discover,
+                DefinedRoute().search,
                 (route) => false,
               );
               context.read<RouteCubit>().navigate(index: value);
@@ -42,7 +42,7 @@ class BottomNavbarGlobal extends StatelessWidget {
               label: "Home",
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search), label: "Discover"),
+                icon: Icon(Icons.search), label: "Search"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.list_alt), label: "My List"),
           ],
