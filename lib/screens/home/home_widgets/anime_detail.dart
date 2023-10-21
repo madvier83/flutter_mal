@@ -26,6 +26,7 @@ class _AnimeDetailState extends State<AnimeDetail> {
         loop: true,
         isLive: false,
         forceHD: false,
+        captionLanguage: 'en',
       ),
     );
     return Scaffold(
@@ -59,7 +60,10 @@ class _AnimeDetailState extends State<AnimeDetail> {
                       spacing: 8,
                       runSpacing: 8,
                       children: [
-                        TextBadge(text: "${widget.anime.score} ★", color: Colors.orange,),
+                        TextBadge(
+                          text: "${widget.anime.score} ★",
+                          color: Colors.orange,
+                        ),
                         ...List.generate(
                           widget.anime.genres?.length ?? 0,
                           (index) => TextBadge(
@@ -75,9 +79,20 @@ class _AnimeDetailState extends State<AnimeDetail> {
                     const SizedBox(
                       height: 16,
                     ),
-                    YoutubePlayer(
-                      controller: controller,
-                      showVideoProgressIndicator: true,
+                    YoutubePlayerBuilder(
+                      player: YoutubePlayer(
+                        controller: controller,
+                      ),
+                      builder: (context, player) {
+                        return Column(
+                          children: [
+                            YoutubePlayer(
+                              controller: controller,
+                              showVideoProgressIndicator: true,
+                            ),
+                          ],
+                        );
+                      },
                     ),
                     const SizedBox(
                       height: 16,

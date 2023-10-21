@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "315255166207",
+    "project_id": "flutter-mal",
+    "storage_bucket": "flutter-mal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315255166207:android:4ca957ca113907379fe8ca",
+        "android_client_info": {
+          "package_name": "com.example.flutter_mal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXBHhl9J-bUaUip9eXmWAmgRAdcO7jmuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -84,6 +84,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                   );
                 } else if (state is GetAnimeSearchSuccess) {
                   return const AnimeSearchResult();
+                } else if (state is GetAnimeSearchError) {
+                  return Text(state.message);
                 }
                 return const SizedBox();
               },

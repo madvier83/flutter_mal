@@ -31,7 +31,7 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE history(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
+        name TEXT
       )
     ''');
   }
