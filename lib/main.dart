@@ -4,21 +4,34 @@ import 'package:flutter_mal/bloc/anime_search/anime_search_bloc.dart';
 import 'package:flutter_mal/bloc/anime_this_season/anime_this_season_bloc.dart';
 import 'package:flutter_mal/bloc/anime_top/anime_top_bloc.dart';
 import 'package:flutter_mal/bloc/anime_upcoming/anime_upcoming_bloc.dart';
+import 'package:flutter_mal/bloc/google_auth/google_auth_cubit.dart';
 import 'package:flutter_mal/bloc/routes/route_cubit.dart';
-import 'package:flutter_mal/screens/search_result/search_result_view.dart';
-import 'package:flutter_mal/screens/home/home_view.dart';
-import 'package:flutter_mal/screens/search/search_view.dart';
+import 'package:flutter_mal/bloc/search_query/search_cubit.dart';
+import 'package:flutter_mal/bloc/trace_image/trace_image_cubit.dart';
+import 'package:flutter_mal/screens/login/login_screen.dart';
+import 'package:flutter_mal/screens/register/register_screen.dart';
+import 'package:flutter_mal/screens/search_result/search_result_screen.dart';
+import 'package:flutter_mal/screens/home/home_screen.dart';
+import 'package:flutter_mal/screens/search/search_screen.dart';
+import 'package:flutter_mal/screens/splash/splash_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'constants/route.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MultiBlocProvider(
     providers: [
+      BlocProvider(create: (context) => GoogleAuthCubit()),
+      BlocProvider(create: (context) => RouteCubit()),
       BlocProvider(create: (context) => AnimeThisSeasonBloc()),
       BlocProvider(create: (context) => AnimeUpcomingBloc()),
       BlocProvider(create: (context) => AnimeTopBloc()),
+      BlocProvider(create: (context) => SearchCubit()),
       BlocProvider(create: (context) => AnimeSearchBloc()),
-      BlocProvider(create: (context) => RouteCubit()),
+      BlocProvider(create: (context) => TraceImageCubit()),
     ],
     child: const MyApp(),
   ));
@@ -35,8 +48,11 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
         useMaterial3: true,
       ),
-      initialRoute: DefinedRoute().home,
+      initialRoute: DefinedRoute().splash,
       routes: {
+        DefinedRoute().splash: (context) => const SplashScreen(),
+        DefinedRoute().login: (context) => const LoginScreen(),
+        DefinedRoute().register: (context) => const RegisterScreen(),
         DefinedRoute().home: (context) => const HomeScreen(),
         DefinedRoute().search: (context) => const SearchScreen(),
         DefinedRoute().searchResult: (context) => const SearchResultScreen(),

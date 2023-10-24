@@ -29,14 +29,10 @@ class AnimeListLoading extends StatelessWidget {
                     height: 200,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.transparent,
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              "https://m.media-amazon.com/images/M/MV5BNzE4ZDEzOGUtYWFjNC00ODczLTljOGQtZGNjNzhjNjdjNjgzXkEyXkFqcGdeQXVyNzE5ODMwNzI@._V1_.jpg",
-                            ),
-                            fit: BoxFit.cover,
+                      child: Card(
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.transparent,
                           ),
                         ),
                       ),

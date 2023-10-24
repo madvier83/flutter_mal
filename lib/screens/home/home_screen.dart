@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_mal/bloc/anime_this_season/anime_this_season_bloc.dart';
@@ -9,11 +10,15 @@ import 'package:flutter_mal/bloc/anime_top/anime_top_state.dart';
 import 'package:flutter_mal/bloc/anime_upcoming/anime_upcoming_bloc.dart';
 import 'package:flutter_mal/bloc/anime_upcoming/anime_upcoming_event.dart';
 import 'package:flutter_mal/bloc/anime_upcoming/anime_upcoming_state.dart';
+import 'package:flutter_mal/bloc/search_query/search_cubit.dart';
+import 'package:flutter_mal/bloc/search_query/search_state.dart';
 import 'package:flutter_mal/constants/route.dart';
 import 'package:flutter_mal/screens/home/home_widgets/anime_list.dart';
 import 'package:flutter_mal/screens/home/home_widgets/anime_list_loading.dart';
+import 'package:flutter_mal/widgets/appbar_global.dart';
 import 'package:flutter_mal/widgets/bottom_navigtion_bar_global.dart';
-import 'package:flutter_mal/widgets/heading.dart';
+import 'package:flutter_mal/widgets/drawer_global.dart';
+import 'package:flutter_mal/widgets/typography/heading.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,50 +38,49 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CircleAvatar(
-              backgroundColor: Colors.transparent,
-            ),
-            Text("MAL Viewer"),
-            CircleAvatar(
-              backgroundColor: Colors.transparent,
-            ),
-          ],
-        ),
-      ),
+      key: scaffoldKey,
+      drawer: const DrawerGlobal(),
+      appBar: AppBarGlobal(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-              child: TextField(
-                onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
-                  DefinedRoute().search,
-                  (route) => false,
-                ),
-                decoration: InputDecoration(
-                  filled: true,
-                  hintText: "Search",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide.none,
+              child: BlocBuilder<SearchCubit, SearchState>(
+                  builder: (context, state) {
+                return GestureDetector(
+                  onTap: () {
+                    state.searchController.clear();
+                    Navigator.of(context).pushNamed(DefinedRoute().search);
+                  },
+                  child: TextField(
+                    enabled: false, // Disable the TextField
+                    decoration: InputDecoration(
+                      filled: true,
+                      hintText: "Search",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: BorderSide.none,
+                      ),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 16),
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.search),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(DefinedRoute().searchResult);
+                          state.searchController.clear();
+                        },
+                      ),
+                    ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(
-                        DefinedRoute().searchResult,
-                      );
-                    },
-                  ),
-                ),
-              ),
+                );
+              }),
             ),
             const SizedBox(
               height: 24,

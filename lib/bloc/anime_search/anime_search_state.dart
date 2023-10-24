@@ -8,6 +8,7 @@ class AnimeSearchState {
 
 // LOADING state
 class GetAnimeSearchInit extends AnimeSearchState {}
+
 class GetAnimeSearchLoading extends AnimeSearchState {}
 
 // SUCCESS state

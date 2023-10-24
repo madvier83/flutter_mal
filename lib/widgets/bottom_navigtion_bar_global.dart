@@ -15,23 +15,20 @@ class BottomNavbarGlobal extends StatelessWidget {
           currentIndex: state.index,
           onTap: (value) {
             if (value == 0) {
-              Navigator.of(context).pushNamedAndRemoveUntil(
+              Navigator.of(context).pushNamed(
                 DefinedRoute().home,
-                (route) => false,
               );
               context.read<RouteCubit>().navigate(index: value);
             }
             if (value == 1) {
-              Navigator.of(context).pushNamedAndRemoveUntil(
+              Navigator.of(context).pushNamed(
                 DefinedRoute().search,
-                (route) => false,
               );
               context.read<RouteCubit>().navigate(index: value);
             }
             if (value == 2) {
-              Navigator.of(context).pushNamedAndRemoveUntil(
+              Navigator.of(context).pushNamed(
                 DefinedRoute().bookmark,
-                (route) => false,
               );
               context.read<RouteCubit>().navigate(index: value);
             }
@@ -41,8 +38,7 @@ class BottomNavbarGlobal extends StatelessWidget {
               icon: Icon(Icons.home),
               label: "Home",
             ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.search), label: "Search"),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.list_alt), label: "My List"),
           ],

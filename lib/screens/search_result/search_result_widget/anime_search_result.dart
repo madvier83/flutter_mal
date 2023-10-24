@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_mal/bloc/anime_search/anime_search_bloc.dart';
 import 'package:flutter_mal/bloc/anime_search/anime_search_state.dart';
 import 'package:flutter_mal/screens/home/home_widgets/anime_detail.dart';
-import 'package:flutter_mal/widgets/badge.dart';
-import 'package:flutter_mal/widgets/heading.dart';
-import 'package:flutter_mal/widgets/small.dart';
+import 'package:flutter_mal/widgets/typography/badge.dart';
+import 'package:flutter_mal/widgets/typography/heading.dart';
+import 'package:flutter_mal/widgets/typography/small.dart';
 
 class AnimeSearchResult extends StatefulWidget {
   const AnimeSearchResult({super.key});
@@ -99,7 +99,7 @@ class _AnimeSearchResultState extends State<AnimeSearchResult> {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       Small(
-                                        "${data.episodes.toString() ?? "-"} Eps - ${data.season ?? "?"} ${data.year ?? "?"}",
+                                        "${data.episodes.toString()} Eps - ${data.season ?? "?"} ${data.year ?? "?"}",
                                       ),
                                       const SizedBox(height: 8),
                                       TextBadge(

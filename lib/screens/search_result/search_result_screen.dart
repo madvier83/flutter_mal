@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_mal/bloc/anime_search/anime_search_bloc.dart';
 import 'package:flutter_mal/bloc/anime_search/anime_search_event.dart';
 import 'package:flutter_mal/bloc/anime_search/anime_search_state.dart';
+import 'package:flutter_mal/bloc/search_query/search_cubit.dart';
+import 'package:flutter_mal/bloc/search_query/search_state.dart';
 import 'package:flutter_mal/constants/route.dart';
 import 'package:flutter_mal/screens/search_result/search_result_widget/anime_search_result.dart';
 import 'package:flutter_mal/widgets/bottom_navigtion_bar_global.dart';
@@ -15,16 +17,8 @@ class SearchResultScreen extends StatefulWidget {
 }
 
 class _SearchResultScreenState extends State<SearchResultScreen> {
-  final searchController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    void searchAnime() {
-      context.read<AnimeSearchBloc>().add(
-            GetAnimeSearch(q: searchController.text),
-          );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Row(
@@ -45,31 +39,36 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-              child: TextField(
-                onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
-                  DefinedRoute().search,
-                  (route) => false,
-                ),
-                decoration: InputDecoration(
-                  filled: true,
-                  hintText: "Search",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide.none,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(
-                        DefinedRoute().searchResult,
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(DefinedRoute().search);
+                  },
+                  child: BlocBuilder<SearchCubit, SearchState>(
+                      builder: (context, state) {
+                    return TextField(
+                      controller: state.searchController,
+                      enabled: false,
+                      decoration: InputDecoration(
+                        filled: true,
+                        hintText: "Search",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 16),
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.search),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(DefinedRoute().searchResult);
+                          },
+                        ),
+                      ),
+                    );
+                  }),
+                )),
             const SizedBox(
               height: 24,
             ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mal/constants/formatter.dart';
 import 'package:flutter_mal/models/anime_model.dart' hide Image;
-import 'package:flutter_mal/widgets/badge.dart';
-import 'package:flutter_mal/widgets/heading.dart';
-import 'package:flutter_mal/widgets/small.dart';
+import 'package:flutter_mal/widgets/typography/badge.dart';
+import 'package:flutter_mal/widgets/typography/heading.dart';
+import 'package:flutter_mal/widgets/typography/small.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class AnimeDetail extends StatefulWidget {
@@ -123,7 +123,7 @@ class _AnimeDetailState extends State<AnimeDetail> {
                           Text(widget.anime.titleSynonyms?[index] ?? ""),
                       itemCount: widget.anime.titleSynonyms?.length ?? 0,
                     ),
-                    Text('${widget.anime.titleEnglish ?? "-"}'),
+                    Text(widget.anime.titleEnglish ?? "-"),
                     const SizedBox(height: 16),
                     const Small("Season"),
                     Text(
@@ -133,15 +133,15 @@ class _AnimeDetailState extends State<AnimeDetail> {
                     Text(
                       widget.anime.aired!.from == true
                           ? ""
-                          : "${Formatter().date(widget.anime.aired!.from ?? DateTime.now())}",
+                          : Formatter()
+                              .date(widget.anime.aired!.from ?? DateTime.now()),
                     ),
                     const SizedBox(height: 16),
                     const Small("Source"),
                     Text(widget.anime.source ?? "-"),
                     const SizedBox(height: 16),
                     const Small("Studio"),
-                    Text(widget.anime.studios!.map((e) => e.name).toString() ??
-                        "-"),
+                    Text(widget.anime.studios!.map((e) => e.name).toString()),
                     const SizedBox(height: 16),
                     const Small("Rating"),
                     Text(widget.anime.rating ?? "-"),

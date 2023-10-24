@@ -48,6 +48,11 @@ dependencies:
   intl: ^0.18.1
   sqflite: ^2.3.0
   path: ^1.8.3
+  firebase_core: ^2.19.0
+  firebase_auth: ^4.11.1
+  google_sign_in: ^6.1.5
+  image_picker: ^1.0.4
+  video_player: ^2.7.2
 
 dev_dependencies:
   flutter_test:
