@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_mal/bloc/anime_this_season/anime_this_season_bloc.dart';
@@ -38,12 +37,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     return Scaffold(
       key: scaffoldKey,
-      drawer: const DrawerGlobal(),
+      endDrawer: const DrawerGlobal(),
       appBar: AppBarGlobal(),
       body: SingleChildScrollView(
         child: Column(

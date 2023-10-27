@@ -10,7 +10,7 @@ AnimeModel animeModelFromJson(String str) =>
 String animeModelToJson(AnimeModel data) => json.encode(data.toJson());
 
 class AnimeModel {
-  int? malId;
+  String? malId;
   String? url;
   String? image;
   Map<String, Image>? images;
@@ -23,7 +23,7 @@ class AnimeModel {
   List<String>? titleSynonyms;
   String? type;
   String? source;
-  int? episodes;
+  String? episodes;
   String? status;
   bool? airing;
   Aired? aired;
@@ -89,7 +89,7 @@ class AnimeModel {
   });
 
   factory AnimeModel.fromJson(Map<String, dynamic> json) => AnimeModel(
-        malId: json["mal_id"],
+        malId: json["mal_id"].toString(),
         url: json["url"],
         image: json["images"]["jpg"]["large_image_url"],
         images: Map.from(json["images"]!)
@@ -108,7 +108,7 @@ class AnimeModel {
             : List<String>.from(json["title_synonyms"]!.map((x) => x)),
         type: json["type"],
         source: json["source"],
-        episodes: json["episodes"],
+        episodes: json["episodes"].toString(),
         status: json["status"],
         airing: json["airing"],
         aired: json["aired"] == null ? null : Aired.fromJson(json["aired"]),
@@ -338,9 +338,9 @@ class Genre {
       };
 }
 
-enum Type { anime }
+enum Type { ANIME }
 
-final typeValues = EnumValues({"anime": Type.anime});
+final typeValues = EnumValues({"anime": Type.ANIME});
 
 class Image {
   String? imageUrl;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_mal/bloc/anime_search/anime_search_bloc.dart';
-import 'package:flutter_mal/bloc/anime_search/anime_search_event.dart';
 import 'package:flutter_mal/bloc/anime_search/anime_search_state.dart';
 import 'package:flutter_mal/bloc/search_query/search_cubit.dart';
 import 'package:flutter_mal/bloc/search_query/search_state.dart';

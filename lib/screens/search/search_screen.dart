@@ -19,7 +19,6 @@ import 'package:flutter_mal/widgets/typography/heading.dart';
 import 'package:flutter_mal/widgets/typography/small.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:video_player/video_player.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -206,7 +205,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                       softWrap: true,
                                                     ),
                                                     Small(
-                                                      'Episode ${data.episode?.toString() ?? "-"} (${Formatter().formatTime(data.from ?? 0)} - ${Formatter().formatTime(data.to ?? 0)}) ',
+                                                      'Episode ${data.episode?.toString() ?? "1"} (${Formatter().formatTime(data.from ?? 0)} - ${Formatter().formatTime(data.to ?? 0)}) ',
                                                     ),
                                                     Small(
                                                       '${NumberFormat('#,###').format((data.similarity ?? 0) * 100)}% Similarity',

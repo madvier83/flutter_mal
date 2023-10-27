@@ -15,14 +15,19 @@ class AppBarGlobal extends StatelessWidget implements PreferredSizeWidget {
       title: const Text("MAL Viewer"),
       leading: IconButton(
         icon: const Icon(Icons.menu),
-        onPressed: () => Scaffold.of(context).openDrawer(),
+        onPressed: () => Scaffold.of(context).openEndDrawer(),
       ),
       actions: [
-        CircleAvatar(
-          radius: 16,
-          backgroundImage: NetworkImage(
-            user?.photoURL ??
-                "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+        GestureDetector(
+          onTap: () {
+            Scaffold.of(context).openEndDrawer();
+          },
+          child: CircleAvatar(
+            radius: 16,
+            backgroundImage: NetworkImage(
+              user?.photoURL ??
+                  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+            ),
           ),
         ),
         const SizedBox(width: 16),

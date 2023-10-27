@@ -109,14 +109,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
         CustomSnackbar().showCustomSnackbar(context, "Password doesn't match");
         return;
       }
-      UserCredential userCredential = await FirebaseAuth.instance
+      await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
       // REDIRECT LOGIN
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        DefinedRoute().login,
-        (route) => false,
-      );
+
+      if (mounted) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          DefinedRoute().login,
+          (route) => false,
+        );
+      }
     } on FirebaseAuthException catch (e) {
       String errorMessage = "Error";
       if (e.code == 'weak-password') {
@@ -124,9 +127,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
       } else if (e.code == 'email-already-in-use') {
         errorMessage = 'The account already exists for that email.';
       }
-      CustomSnackbar().showCustomSnackbar(context, errorMessage);
+
+      if (mounted) {
+        CustomSnackbar().showCustomSnackbar(context, errorMessage);
+      }
     } catch (e) {
-      CustomSnackbar().showCustomSnackbar(context, "Error");
+      if (mounted) {
+        CustomSnackbar().showCustomSnackbar(context, "Error");
+      }
     }
   }
 }

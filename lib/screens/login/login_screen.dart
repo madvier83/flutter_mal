@@ -65,11 +65,34 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
                 builder: (context, state) {
-                  return FilledButton(
-                    onPressed: state is GoogleAuthLoadingState
-                        ? null
-                        : () => context.read<GoogleAuthCubit>().signIn(),
-                    child: const Text("Sign In With Google"),
+                  return Row(
+                    children: [
+                      Expanded(
+                        child: FilledButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                          ),
+                          onPressed: state is GoogleAuthLoadingState
+                              ? () {}
+                              : () => context.read<GoogleAuthCubit>().signIn(),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: Image.asset("assets/images/google.png"),
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              const Text("Sign In With Google"),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   );
                 },
               ),
@@ -102,31 +125,28 @@ class _LoginScreenState extends State<LoginScreen> {
     required String password,
   }) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
+      await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
       // REDIRECT HOME
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        DefinedRoute().home,
-        (route) => false,
-      );
+      if (mounted) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          DefinedRoute().home,
+          (route) => false,
+        );
+      }
     } on FirebaseAuthException {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.red,
-          content: Text(
-            'Wrong email or password.',
-            style: TextStyle(color: Colors.white),
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(
+              'Wrong email or password.',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
-        ),
-      );
-      // if (e.code == 'user-not-found') {
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //       const SnackBar(content: Text('No user found for that email.')));
-      // } else if (e.code == 'wrong-password') {
-      //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      //       content: Text('Wrong password provided for that user.')));
-      // }
+        );
+      }
     }
   }
 }
