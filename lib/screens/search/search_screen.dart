@@ -251,6 +251,7 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

@@ -47,33 +47,12 @@ class BookmarkCubit extends Cubit<BookmarkState> {
         bookmarkList.add(list);
       }
 
-      for (var item in bookmarkList) {
-        if (item.malId == anime.malId) {
-          final documentReference =
-              data.docs.first.reference; // Get reference to the document
+      for (int i = 0; i < bookmarkList.length; i++) {
+        if (bookmarkList[i].malId == anime.malId) {
+          final documentReference = data.docs[i].reference;
           await documentReference.delete();
         }
       }
-
-      print("ok");
-
-      // final User? user = FirebaseAuth.instance.currentUser;
-      // final bookmarksCollection =
-      //     FirebaseFirestore.instance.collection("bookmarks");
-      // print("ok");
-
-      // final querySnapshot = await bookmarksCollection
-      //     .where("user_id", isEqualTo: user?.uid)
-      //     .where("anime", isEqualTo: anime.toJson())
-      //     .get();
-      // print(querySnapshot.docs.first.id);
-
-      // if (querySnapshot.docs.isNotEmpty) {
-      //   await bookmarksCollection.doc(querySnapshot.docs.first.id).delete();
-      //   print("Bookmark deleted successfully.");
-      // } else {
-      //   print("Bookmark not found for this anime.");
-      // }
 
       getBookmarks();
     } catch (e) {
