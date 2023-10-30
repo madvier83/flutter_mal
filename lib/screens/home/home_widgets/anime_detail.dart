@@ -70,7 +70,7 @@ class _AnimeDetailState extends State<AnimeDetail> {
                     runSpacing: 8,
                     children: [
                       TextBadge(
-                        text: "${widget.anime.score} ★",
+                        text: "${widget.anime.score ?? "?"} ★",
                         color: Colors.orange,
                       ),
                       ...List.generate(
@@ -156,6 +156,9 @@ class _AnimeDetailState extends State<AnimeDetail> {
                   Text(widget.anime.rating ?? "-"),
                   const SizedBox(height: 16),
                   const Divider(),
+                  const SizedBox(
+                    height: 64,
+                  )
                 ],
               ),
             ),

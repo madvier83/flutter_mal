@@ -47,8 +47,8 @@ class _DrawerGlobalState extends State<DrawerGlobal> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: FilledButton.tonal(
-                          onPressed: () {
-                            signOut();
+                          onPressed: () async {
+                            await signOut();
                           },
                           child: const Text("Sign Out"),
                         ),

@@ -9,6 +9,7 @@ import 'package:flutter_mal/bloc/google_auth/google_auth_cubit.dart';
 import 'package:flutter_mal/bloc/routes/route_cubit.dart';
 import 'package:flutter_mal/bloc/search_query/search_cubit.dart';
 import 'package:flutter_mal/bloc/trace_image/trace_image_cubit.dart';
+import 'package:flutter_mal/firebase_options.dart';
 import 'package:flutter_mal/screens/bookmark/bookmark_screen.dart';
 import 'package:flutter_mal/screens/login/login_screen.dart';
 import 'package:flutter_mal/screens/register/register_screen.dart';
@@ -23,7 +24,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider(create: (context) => RouteCubit()),

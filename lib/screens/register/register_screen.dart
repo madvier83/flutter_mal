@@ -53,18 +53,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const SizedBox(
                 height: 16,
               ),
-              FilledButton(
-                onPressed: () async {
-                  try {
-                    await register(
-                      email: emailController.text,
-                      password: passwordController.text,
-                    );
-                  } catch (e) {
-                    print("Failed");
-                  }
-                },
-                child: const Text("Create Account"),
+              Row(
+                children: [
+                  Expanded(
+                    child: FilledButton(
+                      onPressed: () async {
+                        try {
+                          await register(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                        } catch (e) {
+                          print("Failed");
+                        }
+                      },
+                      child: const Text("Create Account"),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 24,

@@ -6,6 +6,7 @@ import 'package:flutter_mal/bloc/google_auth/google_auth_state.dart';
 import 'package:flutter_mal/constants/route.dart';
 import 'package:flutter_mal/widgets/form/text_field_global.dart';
 import 'package:flutter_mal/widgets/typography/heading.dart';
+import 'package:flutter_mal/widgets/typography/small.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -43,20 +44,33 @@ class _LoginScreenState extends State<LoginScreen> {
                 obscureText: true,
               ),
               const SizedBox(height: 16),
-              FilledButton(
-                onPressed: () async {
-                  try {
-                    await login(
-                      email: emailController.text,
-                      password: passwordController.text,
-                    );
-                  } catch (e) {
-                    print("Failed");
-                  }
-                },
-                child: const Text("Sign In"),
+              Row(
+                children: [
+                  Expanded(
+                    child: FilledButton(
+                      onPressed: () async {
+                        try {
+                          await login(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                        } catch (e) {
+                          print("Failed");
+                        }
+                      },
+                      child: const Text("Sign In"),
+                    ),
+                  ),
+                ],
               ),
-              const Divider(),
+              const SizedBox(
+                height: 32,
+                child: Row(children: [
+                  Expanded(child: Divider()),
+                  Small(" OR "),
+                  Expanded(child: Divider()),
+                ]),
+              ),
               BlocConsumer<GoogleAuthCubit, GoogleAuthState>(
                 listener: (context, state) {
                   if (state is GoogleAuthSuccessState) {
