@@ -140,10 +140,9 @@ class _AnimeDetailState extends State<AnimeDetail> {
                   const SizedBox(height: 16),
                   const Small("Aired"),
                   Text(
-                    widget.anime.aired!.from == true
-                        ? ""
-                        : Formatter()
-                            .date(widget.anime.aired!.from ?? DateTime.now()),
+                    (widget.anime.aired!.from != null)
+                        ? Formatter().date(widget.anime.aired!.from!)
+                        : "?",
                   ),
                   const SizedBox(height: 16),
                   const Small("Source"),
