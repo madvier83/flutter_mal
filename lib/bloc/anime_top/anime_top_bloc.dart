@@ -8,6 +8,7 @@ class AnimeTopBloc extends Bloc<AnimeTopEvent, AnimeTopState> {
     on<GetAnimeTop>(
       (event, emit) async {
         try {
+          emit(GetAnimeTopLoading());
           final animeTop = await AnimeApi().getAnimeTop();
           emit(GetAnimeTopSuccess(animeTop: animeTop));
         } catch (error) {

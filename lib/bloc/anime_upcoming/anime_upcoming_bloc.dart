@@ -8,6 +8,7 @@ class AnimeUpcomingBloc extends Bloc<AnimeUpcomingEvent, AnimeUpcomingState> {
     on<GetAnimeUpcoming>(
       (event, emit) async {
         try {
+          emit(GetAnimeUpcomingLoading());
           final animeUpcoming = await AnimeApi().getAnimeUpcoming();
           emit(GetAnimeUpcomingSuccess(animeUpcoming: animeUpcoming));
         } catch (error) {
