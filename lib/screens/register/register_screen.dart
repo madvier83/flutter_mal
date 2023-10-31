@@ -64,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             password: passwordController.text,
                           );
                         } catch (e) {
-                          print("Failed");
+                          // print("Failed");
                         }
                       },
                       child: const Text("Create Account"),

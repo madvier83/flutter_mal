@@ -72,12 +72,14 @@ class _DrawerGlobalState extends State<DrawerGlobal> {
       await FirebaseAuth.instance.signOut();
       await GoogleSignIn().signOut();
       // REDIRECT LOGIN
-      Navigator.of(context).pushNamedAndRemoveUntil(
-        DefinedRoute().login,
-        (route) => false,
-      );
+      if (mounted) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+          DefinedRoute().login,
+          (route) => false,
+        );
+      }
     } catch (e) {
-      print("Error signing out: $e");
+      // print("Error signing out: $e");
     }
   }
 }

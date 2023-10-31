@@ -25,20 +25,22 @@ import 'package:firebase_core/firebase_core.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider(create: (context) => RouteCubit()),
-      BlocProvider(create: (context) => GoogleAuthCubit()),
-      BlocProvider(create: (context) => AnimeThisSeasonBloc()),
-      BlocProvider(create: (context) => AnimeUpcomingBloc()),
-      BlocProvider(create: (context) => AnimeTopBloc()),
-      BlocProvider(create: (context) => SearchCubit()),
-      BlocProvider(create: (context) => AnimeSearchBloc()),
-      BlocProvider(create: (context) => TraceImageCubit()),
-      BlocProvider(create: (context) => BookmarkCubit()),
-    ],
-    child: const MyApp(),
-  ));
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => RouteCubit()),
+        BlocProvider(create: (context) => GoogleAuthCubit()),
+        BlocProvider(create: (context) => AnimeThisSeasonBloc()),
+        BlocProvider(create: (context) => AnimeUpcomingBloc()),
+        BlocProvider(create: (context) => AnimeTopBloc()),
+        BlocProvider(create: (context) => SearchCubit()),
+        BlocProvider(create: (context) => AnimeSearchBloc()),
+        BlocProvider(create: (context) => TraceImageCubit()),
+        BlocProvider(create: (context) => BookmarkCubit()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             password: passwordController.text,
                           );
                         } catch (e) {
-                          print("Failed");
+                          // print("Failed");
                         }
                       },
                       child: const Text("Sign In"),

@@ -25,7 +25,7 @@ class TraceApi {
         ),
       );
 
-      print(response);
+      // print(response);
 
       return TraceModel.fromJson(response.data);
     } catch (e) {

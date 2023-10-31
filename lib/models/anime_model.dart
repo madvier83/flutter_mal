@@ -338,9 +338,9 @@ class Genre {
       };
 }
 
-enum Type { ANIME }
+enum Type { anime }
 
-final typeValues = EnumValues({"anime": Type.ANIME});
+final typeValues = EnumValues({"anime": Type.anime});
 
 class Image {
   String? imageUrl;

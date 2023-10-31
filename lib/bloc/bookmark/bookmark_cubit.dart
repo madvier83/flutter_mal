@@ -56,7 +56,7 @@ class BookmarkCubit extends Cubit<BookmarkState> {
 
       getBookmarks();
     } catch (e) {
-      print("An error occurred while deleting the bookmark: $e");
+      // print("An error occurred while deleting the bookmark: $e");
       // Handle the error as needed, e.g., show an error message to the user.
     }
   }
