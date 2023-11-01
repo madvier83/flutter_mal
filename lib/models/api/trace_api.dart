@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_mal/constants/url.dart';
 import 'package:flutter_mal/models/trace_model.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,7 +17,7 @@ class TraceApi {
       );
 
       final response = await Dio().post(
-        'https://api.trace.moe/search?anilistInfo',
+        '${Url().traceApi}search?anilistInfo',
         data: formData,
         options: Options(
           headers: {

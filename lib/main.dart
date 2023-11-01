@@ -19,7 +19,6 @@ import 'package:flutter_mal/screens/search/search_screen.dart';
 import 'package:flutter_mal/screens/splash/splash_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'constants/route.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {

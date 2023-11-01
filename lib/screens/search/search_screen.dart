@@ -299,6 +299,14 @@ class _SearchScreenState extends State<SearchScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 32.0),
                 child: Heading("Search History"),
               ),
+              SizedBox(
+                child: history.isEmpty
+                    ? const Padding(
+                        padding: EdgeInsets.all(32.0),
+                        child: Small("No search history"),
+                      )
+                    : null,
+              ),
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: history.length,

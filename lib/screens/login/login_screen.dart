@@ -84,9 +84,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       Expanded(
                         child: FilledButton(
                           style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.white),
-                          ),
+                              backgroundColor: state is GoogleAuthLoadingState
+                                  ? MaterialStateProperty.all(Colors.grey)
+                                  : MaterialStateProperty.all(Colors.white)),
                           onPressed: state is GoogleAuthLoadingState
                               ? () {}
                               : () => context.read<GoogleAuthCubit>().signIn(),

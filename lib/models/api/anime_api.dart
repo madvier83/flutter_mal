@@ -8,7 +8,7 @@ class AnimeApi {
   Future<List<AnimeModel>> getAnimeThisSeason() async {
     List<AnimeModel> data = [];
     try {
-      final response = await dio.get("${Url().baseUrl}seasons/now");
+      final response = await dio.get("${Url().jikanApi}seasons/now");
       (response.data["data"] as Iterable)
           .map((e) => data.add(AnimeModel.fromJson(e)))
           .toList();
@@ -21,7 +21,7 @@ class AnimeApi {
   Future<List<AnimeModel>> getAnimeUpcoming() async {
     List<AnimeModel> data = [];
     try {
-      final response = await dio.get("${Url().baseUrl}seasons/upcoming");
+      final response = await dio.get("${Url().jikanApi}seasons/upcoming");
       (response.data["data"] as Iterable)
           .map((e) => data.add(AnimeModel.fromJson(e)))
           .toList();
@@ -34,7 +34,7 @@ class AnimeApi {
   Future<List<AnimeModel>> getAnimeTop() async {
     List<AnimeModel> data = [];
     try {
-      final response = await dio.get("${Url().baseUrl}top/anime");
+      final response = await dio.get("${Url().jikanApi}top/anime");
       (response.data["data"] as Iterable)
           .map((e) => data.add(AnimeModel.fromJson(e)))
           .toList();
@@ -47,8 +47,8 @@ class AnimeApi {
   Future<List<AnimeModel>> getAnimeSearch({required String q}) async {
     List<AnimeModel> data = [];
     try {
-      final response =
-          await dio.get("${Url().baseUrl}anime", queryParameters: {"q": q, "sfw": true});
+      final response = await dio.get("${Url().jikanApi}anime",
+          queryParameters: {"q": q, "sfw": true});
       (response.data["data"] as Iterable)
           .map((e) => data.add(AnimeModel.fromJson(e)))
           .toList();
